@@ -1,0 +1,13 @@
+<?php
+
+namespace App\DummyDomain\Domain\Repositories;
+
+use App\App\Domain\Repositories\Repository;
+use App\DummyDomain\Domain\Models\Dummy;
+
+class DummyRepository extends Repository {
+    protected $model;
+    public function __construct(Dummy $dummy) {
+        $this->model = $dummy;
+    }
+}
