@@ -88,7 +88,6 @@ module.exports = {
             propertyName: 'data'
           }
         }
-
       }
     }
   },

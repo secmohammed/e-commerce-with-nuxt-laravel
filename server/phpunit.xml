@@ -27,6 +27,7 @@
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
+        <env name="DB_DATABASE" value="cart_testing"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
     </php>
