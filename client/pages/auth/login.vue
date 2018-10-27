@@ -4,7 +4,7 @@
     <div class="columns is-centered">
       <div class="column is-6">
         <h1 class="title is-4">Login</h1>
-        <form action="" @submit.prevent="login">
+        <form action="#" @submit.prevent="login">
           <div class="field">
             <label class="label">Email</label>
             <div class="control">
@@ -43,15 +43,11 @@
             }
         },
         methods : {
-            async login(){
-                await this.$auth.loginWith('local',{
+            login(){
+                this.$auth.login({
                     data : this.form
-                })
-                this.$router.replace({
-                    name : 'index'
-                })
-            }
-            
+                }).then(() => window.location = '/').catch(error => console.log(error))
+            },            
         }
     }
 </script>
