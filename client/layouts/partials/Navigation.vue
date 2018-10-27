@@ -32,9 +32,9 @@
     </div>
     <div id="nav" class="navbar-menu">
       <div class="navbar-end">
-        <a href="" class="navbar-item">
+        <nuxt-link :to="{ name :'auth-login'}" class="navbar-item">
           Sign in
-        </a>
+        </nuxt-link>
       </div>
     </div>
     </div>
