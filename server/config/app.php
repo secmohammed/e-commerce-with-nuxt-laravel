@@ -169,6 +169,7 @@ return [
          */
         App\App\Providers\AppServiceProvider::class,
         App\App\Providers\AuthServiceProvider::class,
+        \App\Providers\EloquentEventServiceProvider::class,
         // App\App\Providers\BroadcastServiceProvider::class,
         App\App\Providers\EventServiceProvider::class,
         App\App\Providers\RouteServiceProvider::class,

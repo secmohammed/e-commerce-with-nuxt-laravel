@@ -12,7 +12,7 @@ class IndexProductsService implements ServiceInterface {
         $this->products = $products;
     }
     public function handle($data = []) {
-        return new GenericPayload($this->products->withScopes($this->scopes())->paginate(10));
+        return new GenericPayload($this->products->with(['variations.stock'])->withScopes($this->scopes())->paginate(10));
     }
     protected function scopes()
     {

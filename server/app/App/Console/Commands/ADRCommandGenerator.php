@@ -9,7 +9,7 @@ class ADRCommandGenerator extends Command {
      *
      * @var string
      */
-    protected $signature = 'adr:generate {domain : Name Of The Domain Folder.} {name : name of  the file} {--A|all} {--m|model : model associated with repository} {--s|service} {--c|collection} {--r|responder} {--a|action}';
+    protected $signature = 'adr:generate {domain : Name Of The Domain Folder.} {name? : name of  the file} {--A|all} {--m|model : model associated with repository} {--s|service} {--c|collection} {--r|responder} {--a|action}';
     /**
      * The console command description.
      *
