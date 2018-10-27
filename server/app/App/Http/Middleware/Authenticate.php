@@ -2,6 +2,8 @@
 
 namespace App\App\Http\Middleware;
 
+use App\App\Domain\Payloads\UnauthorizedPayload;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -14,8 +16,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
-        }
+        return response()->json('Unauthenticated Attempt' , 401);
     }
 }
