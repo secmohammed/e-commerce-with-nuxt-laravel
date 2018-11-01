@@ -4,16 +4,15 @@
         <div class="columns is-centered">
             <div class="column is-three-quarters">
                 <h1 class="title is-4">Your cart</h1>
-                {{ changed }}
                 <article class="message" v-if="products.length">
                     <CartOverview />
                 </article>
                 <p v-else> Your Cart is empty.</p>
-                <a
-                    href="#"
+                <nuxt-link
+                    :to="{ name : 'checkout'}"
                     class="button is-fullwidth is-info is-medium" v-if="!empty">
                     Checkout
-                </a>
+                </nuxt-link>
             </div>
         </div>
     </div>

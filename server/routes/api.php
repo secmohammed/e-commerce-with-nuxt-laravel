@@ -26,4 +26,7 @@ Route::group(['middleware' => ['auth:api']] , function (){
     Route::get('cart',\App\Cart\Actions\IndexCartAction::class);
     Route::put('cart/{productVariation}',\App\Cart\Actions\UpdateCartAction::class);
     Route::delete('cart/{productVariation}',\App\Cart\Actions\DeleteCartAction::class);
+    Route::get('addresses' , \App\Addresses\Actions\IndexAddressesAction::class);
+    Route::post('addresses' , \App\Addresses\Actions\StoreAddressAction::class);
+
 });

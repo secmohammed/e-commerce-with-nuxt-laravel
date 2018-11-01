@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Providers;
+namespace App\App\Providers;
 
-use App\Users\Domain\Models\User;
 use Illuminate\Support\ServiceProvider;
 
 class EloquentEventServiceProvider extends ServiceProvider
@@ -14,7 +13,8 @@ class EloquentEventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        User::observe(\App\Users\Domain\Observers\UserObserver::class);
+        \App\Users\Domain\Models\User::observe(\App\Users\Domain\Observers\UserObserver::class);
+        \App\Addresses\Domain\Models\Address::observe(\App\Addresses\Domain\Observers\AddressObserver::class);
     }
 
     /**
