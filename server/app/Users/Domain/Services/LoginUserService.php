@@ -14,7 +14,7 @@ class LoginUserService implements ServiceInterface {
     public function handle($data = []) {
         if (!$token = auth()->attempt($data)) {
             return new UnauthorizedPayload([
-                'errors' => [ 'emai' => 'Could not sign you in with those details.']
+                'errors' => [ 'email' => 'Could not sign you in with those details.']
             ]);
         }
 

@@ -27,13 +27,17 @@ class ProductVariation extends Model
         }
         return new Money($value);
     }
+    public function minStock($amount)
+    {
+        return min($this->stock_count, $amount);
+    }
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
     public function stocks()
     {
-        return $this->hasMany(Stock::class);   
+        return $this->hasMany(Stock::class);
     }
     public function stock()
     {

@@ -33,21 +33,24 @@
 </div>
 </template>
 <script>
-    export default {
-        data(){
-            return {
-                form : {
-                    password : '',
-                    email : ''
-                }
-            }
-        },
-        methods : {
-            login(){
-                this.$auth.login({
-                    data : this.form
-                }).then(() => window.location = '/').catch(error => console.log(error))
-            },            
+  export default {
+    data(){
+      return {
+        form : {
+            password : '',
+            email : ''
         }
+      }
+    },
+    methods : {
+      async login(){
+        await this.$auth.loginWith('local',{
+          data : this.form
+        })
+        this.$router.replace({
+          name: 'index'
+        })
+      },            
     }
+  }
 </script>

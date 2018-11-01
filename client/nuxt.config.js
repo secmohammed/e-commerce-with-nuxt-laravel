@@ -50,7 +50,8 @@ module.exports = {
   },
   plugins: [
     './plugins/mixins/user.js',
-    './plugins/axios.js',{
+    // './plugins/axios.js',
+    {
       src: './plugins/vee-validate.js',
       ssr: true
     }
@@ -59,7 +60,7 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: 'http://127.0.0.1:8000/api/',
     redirectError: {
       401: '/auth/login',
       500: '/'

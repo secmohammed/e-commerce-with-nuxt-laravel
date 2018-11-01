@@ -3,12 +3,15 @@
 namespace App\Users\Domain\Observers;
 
 use App\Users\Domain\Models\User;
-use Hash;
 
 class UserObserver
 {
     public function creating(User $user)
     {
-        $user->password = Hash::make($user->password);
+        $user->password = bcrypt($user->password);
+    }
+    public function updating(User $user)
+    {
+        $user->password = bcrypt($user->password);
     }
 }

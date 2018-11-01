@@ -2,6 +2,7 @@
 
 namespace App\Users\Domain\Models;
 
+use App\ProductVariation\Domain\Models\ProductVariation;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,5 +48,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public function cart()
+    {
+        return $this->belongsToMany(ProductVariation::class,'cart_user')
+        ->withPivot('quantity')->withTimestamps();
     }
 }

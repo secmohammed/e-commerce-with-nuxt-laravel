@@ -8,6 +8,8 @@ use App\Users\Domain\Resources\UserResource;
 
 class AuthenticatedUserResponder extends Responder implements ResponderInterface {
     public function respond() {
-        return new UserResource($this->response->getData());
+        return (new UserResource($this->response->getData()))->additional([
+            'token' => auth()->getToken()->get()
+        ]);
     }
 }

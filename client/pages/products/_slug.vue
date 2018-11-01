@@ -22,21 +22,21 @@
                     </span>
                 </section>
                 <section class="section">
-                    <form action="">
+                    <form action="#" @submit.prevent="add">
                         <ProductVariation v-for="(variations,type) in product.variations" :type="type" :key="type" :variations="variations"  v-model="form.variation" />
-                    </form>
-                    <div class="field has-addons" v-if="form.variation">
-                        <div class="control">
-                            <div class="select is-fullwidth" >
-                                <select v-model="form.quantity">
-                                    <option :value="x" v-for="x in parseInt(form.variation.stock_count)" :key="x">{{ x }}</option>
-                                </select>
+                        <div class="field has-addons" v-if="form.variation">
+                            <div class="control">
+                                <div class="select is-fullwidth" >
+                                    <select v-model="form.quantity">
+                                        <option :value="x" v-for="x in parseInt(form.variation.stock_count)" :key="x">{{ x }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control">
+                                <button class="button is-info">Add To Cart</button>
                             </div>
                         </div>
-                        <div class="control">
-                            <button class="button is-info">Add To Cart</button>
-                        </div>
-                    </div>
+                    </form>
                 </section>  
             </div>
         </div>
@@ -44,6 +44,7 @@
 </div>
 </template>
 <script>
+    import { mapActions } from 'vuex'
     import ProductVariation from '@/components/products/ProductVariation'
     export default {
         data(){
@@ -67,6 +68,21 @@
             let response = await app.$axios.$get(`products/${params.slug}`)
             return {
                 product : response.data
+            }
+        },
+        methods : {
+            ...mapActions({
+                store : 'cart/store'
+            }),
+            add () {
+                this.store([{
+                    id : this.form.variation.id,
+                    quantity : this.form.quantity
+                }])
+                this.form = {
+                    variation : '',
+                    quantity : 1
+                }
             }
         }
     };

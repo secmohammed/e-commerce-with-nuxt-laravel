@@ -4,6 +4,7 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Arr;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 abstract class TestCase extends BaseTestCase
@@ -16,4 +17,15 @@ abstract class TestCase extends BaseTestCase
             'Authorization' => 'Bearer ' . $token
         ]));
     }
+    public function assertJsonValidationMessages($response,$keys)
+    {
+        $errors = $response->json()['errors'];
+
+        foreach (Arr::wrap($keys) as $key => $message) {
+            $this->assertEquals($message , $errors[$key][0]);
+        }
+
+        return $this;
+    }
+
 }
