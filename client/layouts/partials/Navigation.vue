@@ -36,9 +36,9 @@
           Sign in
         </nuxt-link>
         <template v-else>
-            <a href="#" class="navbar-item">
-              Order
-            </a>
+            <nuxt-link :to="{ name: 'order' }" class="navbar-item">
+              Orders
+            </nuxt-link>
             <nuxt-link :to="{name : 'cart' }" class="navbar-item">
               Cart ({{ cartCount }})
             </nuxt-link>

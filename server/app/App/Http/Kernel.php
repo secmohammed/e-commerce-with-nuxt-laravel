@@ -14,13 +14,14 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        \Barryvdh\Cors\HandleCors::class,
         \App\App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\App\Http\Middleware\TrustProxies::class,
-        \Barryvdh\Cors\HandleCors::class,
         \App\App\Http\Middleware\ProfileJsonResponse::class
+
     ];
 
     /**
@@ -42,6 +43,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \App\App\Http\Middleware\JsonifyResponse::class
         ],
     ];
 
@@ -62,6 +64,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'cart.sync' => \App\App\Http\Middleware\Cart\Sync::class,
+        'cart.isnotempty' => \App\App\Http\Middleware\Cart\RespondIfEmpty::class
     ];
 
     /**

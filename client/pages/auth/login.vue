@@ -37,8 +37,8 @@
     data(){
       return {
         form : {
-            password : '',
-            email : ''
+          password : '',
+          email : ''
         }
       }
     },

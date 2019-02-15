@@ -5,6 +5,7 @@ namespace Tests\Unit\Cart;
 use App\App\Domain\Cart\Cart;
 use App\App\Domain\Cart\Money;
 use App\ProductVariation\Domain\Models\ProductVariation;
+use App\ShippingMethods\Domain\Models\ShippingMethod;
 use App\Users\Domain\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -158,6 +159,55 @@ class CartTest extends TestCase
         );
         $cart->sync();
         $this->assertTrue($cart->hasChanged());
+    }
+    /** @test */
+    public function it_can_return_the_correct_total_without_shipping()
+    {
+        $cart = new Cart(
+            $user = factory(User::class)->create()
+        );
+        $user->cart()->attach(
+            $product = factory(ProductVariation::class)->create([
+                'price' => 1000
+            ]),[
+                'quantity' => 2
+            ]
+        );
+        $this->assertEquals($cart->total()->amount() , 2000);
+    }
+    /** @test */
+    public function it_returns_products_in_cart()
+    {
+        $cart = new Cart(
+            $user = factory(User::class)->create()
+        );
+        $user->cart()->attach(
+            $product = factory(ProductVariation::class)->create([
+                'price' => 1000
+            ]),[
+                'quantity' => 2
+            ]
+        );
+        $this->assertInstanceOf(ProductVariation::class, $cart->products()->first());
+    }
+    /** @test */
+    public function it_can_return_the_correct_total_with_shipping()
+    {
+        $cart = new Cart(
+            $user = factory(User::class)->create()
+        );
+        $shipping = factory(ShippingMethod::class)->create([
+            'price' => 1000
+        ]);
+        $user->cart()->attach(
+            $product = factory(ProductVariation::class)->create([
+                'price' => 1000
+            ]),[
+                'quantity' => 2
+            ]
+        );
+        $cart = $cart->withShipping($shipping->id);
+        $this->assertEquals($cart->total()->amount() , 3000);
     }
 
 }

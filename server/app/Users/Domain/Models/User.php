@@ -3,6 +3,7 @@
 namespace App\Users\Domain\Models;
 
 use App\Addresses\Domain\Models\Address;
+use App\Orders\Domain\Models\Order;
 use App\ProductVariation\Domain\Models\ProductVariation;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -54,6 +55,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(ProductVariation::class,'cart_user')
         ->withPivot('quantity')->withTimestamps();
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
     public function addresses()
     {

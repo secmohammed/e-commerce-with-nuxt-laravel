@@ -3,14 +3,21 @@
 namespace App\App\Domain\Cart;
 
 use App\App\Domain\Cart\Money;
+use App\ShippingMethods\Domain\Models\ShippingMethod;
 use App\Users\Domain\Models\User;
 
 class Cart
 {
     protected $user;
     protected $changed = false;
+    protected $shipping;
     public function __construct(User $user = null){
         $this->user = $user;
+    }
+    public function withShipping($shippingId)
+    {
+        $this->shipping = ShippingMethod::find($shippingId);
+        return $this;
     }
     public function add($products)
     {
@@ -34,7 +41,7 @@ class Cart
     }
     public function isEmpty()
     {
-        return $this->user->cart->sum('pivot.quantity') === 0;
+        return $this->user->cart->sum('pivot.quantity') <= 0;
     }
     public function subtotal()
     {
@@ -60,7 +67,14 @@ class Cart
     }
     public function total()
     {
+        if ($this->shipping) {
+            return $this->subtotal()->add($this->shipping->price);
+        }
         return $this->subtotal();
+    }
+    public function products()
+    {
+        return $this->user->cart;
     }
     protected function getCurrentQuantity($productId)
     {

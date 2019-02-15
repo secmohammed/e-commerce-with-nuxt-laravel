@@ -14,7 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
     }
 
     /**
@@ -25,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Cart::class , function ($app){
+            if ($app->auth->user()) {
+                $app->auth->user()->load([
+                    'cart.stock'
+                ]);
+            }
+            
             return new Cart($app->auth->user());
         });
     }

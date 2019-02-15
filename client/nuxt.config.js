@@ -1,4 +1,12 @@
 module.exports = {
+ chainWebpack: config => {
+    if (process.env.NODE_ENV === 'development') {
+      config
+        .output
+        .filename('[name].[hash].js') 
+        .end() 
+    }  
+  },
   mode: 'universal',
 
   /*
@@ -60,7 +68,7 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    baseURL: 'http://127.0.0.1:8000/api/',
+    baseURL: 'http://cart.dev:80/api/',
     redirectError: {
       401: '/auth/login',
       500: '/'

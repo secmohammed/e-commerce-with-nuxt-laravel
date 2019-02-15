@@ -63,7 +63,7 @@ class AddressStoreTest extends TestCase
             'address_1' => '123 code street',
             'postal_code' => 'C0123',
             'country_id' => factory(Country::class)->create()->id,
-            'city' => 'London'
+            'city' => 'London',
         ]);
         $this->assertDatabaseHas('addresses',array_merge($payload,[
             'user_id' => $user->id

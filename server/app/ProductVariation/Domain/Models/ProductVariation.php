@@ -5,6 +5,7 @@ namespace App\ProductVariation\Domain\Models;
 use App\App\Domain\Cart\Money;
 use App\App\Domain\Traits\HasPrice;
 use App\ProductVariationType\Domain\Models\ProductVariationType;
+use App\ProductVariation\Domain\Collections\ProductVariationCollection;
 use App\Products\Domain\Models\Product;
 use App\Stocks\Domain\Models\Stock;
 use Illuminate\Database\Eloquent\Model;
@@ -54,5 +55,10 @@ class ProductVariation extends Model
     public function getInStockAttribute()
     {
         return $this->stock_count > 0;
+    }
+    // laravel will use this instead of the eloquent collection,if such method exists.
+    public function newCollection(array $models = [])
+    {
+        return new ProductVariationCollection($models);
     }
 }

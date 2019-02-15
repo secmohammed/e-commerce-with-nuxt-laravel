@@ -29,7 +29,7 @@ class StoreAddressRequestForm extends FormRequest
             'city' => 'required',
             'postal_code' => 'required',
             'country_id' => 'required|exists:countries,id',
-            'default' => 'required|boolean'
+            'default' => 'nullable|boolean'
         ];
     }
 }
