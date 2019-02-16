@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     public function jsonAs(JWTSubject $user , $method , $endpoint , $data = [] , $headers = [])
     {
         $token = auth()->tokenById($user->id);
-        return $this->json($method,$endpoint,$data,array_merge($headers,[
+        return $this->json($method, $endpoint, $data, array_merge($headers, [
             'Authorization' => 'Bearer ' . $token
         ]));
     }

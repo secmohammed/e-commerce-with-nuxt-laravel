@@ -19,7 +19,16 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         \App\Orders\Domain\Events\OrderCreated::class => [
+            \App\PaymentMethods\Domain\Listeners\ProcessPayment::class,
             \App\Orders\Domain\Listeners\EmptyCart::class
+        ],
+        \App\Orders\Domain\Events\OrderPaid::class => [
+            \App\Orders\Domain\Listeners\MarkOrderProcessing::class,
+            \App\Orders\Domain\Listeners\CreateTransaction::class,
+            
+        ],        
+        \App\Orders\Domain\Events\OrderPaymentFailed::class => [
+            \App\Orders\Domain\Listeners\MarkOrderPaymentFailed::class
         ]
     ];
 

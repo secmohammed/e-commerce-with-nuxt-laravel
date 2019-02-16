@@ -5,8 +5,10 @@ namespace Tests\Unit\Models\Orders;
 use App\Addresses\Domain\Models\Address;
 use App\App\Domain\Cart\Money;
 use App\Orders\Domain\Models\Order;
+use App\PaymentMethods\Domain\Models\PaymentMethod;
 use App\ProductVariation\Domain\Models\ProductVariation;
 use App\ShippingMethods\Domain\Models\ShippingMethod;
+use App\Transactions\Domain\Models\Transaction;
 use App\Users\Domain\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -45,6 +47,16 @@ class OrderTest extends TestCase
         $this->assertInstanceOf(ShippingMethod::class, $order->shippingMethod);
     }
     /** @test */
+    public function it_belongs_a_payment_method()
+    {
+        $user = factory(User::class)->create();
+
+        $order = factory(Order::class)->create([
+            'user_id' => $user->id
+        ]);
+        $this->assertInstanceOf(PaymentMethod::class, $order->paymentMethod);
+    }
+    /** @test */
     public function it_has_many_products()
     {
         $order = factory(Order::class)->create([
@@ -58,6 +70,21 @@ class OrderTest extends TestCase
         );
         $this->assertInstanceOf(ProductVariation::class, $order->products->first());
     }
+
+    /** @test */
+    public function it_has_many_transactions()
+    {
+        $order = factory(Order::class)->create([
+            'user_id' => factory(User::class)->create()->id
+        ]);
+        $order->transactions()->save(
+            factory(Transaction::class)->make([
+                'order_id' => $order->id
+            ])
+        );
+        $this->assertInstanceOf(Transaction::class, $order->transactions->first());
+    }
+
     /** @test */
     public function it_has_a_quantity_attached_to_the_products()
     {
@@ -72,6 +99,7 @@ class OrderTest extends TestCase
         );
         $this->assertEquals($order->products->first()->pivot->quantity, $quantity);
     }
+    
     /** @test */
     public function it_has_a_default_status_of_pending()
     {

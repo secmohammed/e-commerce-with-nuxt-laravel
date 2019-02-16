@@ -33,6 +33,7 @@
         components: {
             Order
         },
+        middleware: 'redirectIfGuest',
         async asyncData ({ app }) {
             let response = await app.$axios.$get('orders')
             return {

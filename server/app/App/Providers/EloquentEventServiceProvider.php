@@ -15,6 +15,7 @@ class EloquentEventServiceProvider extends ServiceProvider
     {
         \App\Users\Domain\Models\User::observe(\App\Users\Domain\Observers\UserObserver::class);
         \App\Addresses\Domain\Models\Address::observe(\App\Addresses\Domain\Observers\AddressObserver::class);
+        \App\PaymentMethods\Domain\Models\PaymentMethod::observe(\App\PaymentMethods\Domain\Observers\PaymentMethodObserver::class);
     }
 
     /**

@@ -22,6 +22,7 @@
     import {mapGetters} from 'vuex'
     import CartOverview from '@/components/cart/CartOverview'
     export default {
+        middleware: 'redirectIfGuest',
         components : {
             CartOverview
         },

@@ -11,7 +11,16 @@ class IndexOrderService extends Service {
         $this->orders = $orders;
     }
     public function handle($request = []) {
-        $orders = $request->user()->orders()->with(['products', 'address', 'shippingMethod'])->latest()->paginate(10);
+        $orders = $request->user()->orders()->with([
+            'products',
+            'products.stocks',
+            'products.type',
+            'products.product',
+            'products.product.variations',
+            'products.product.variations.stock',
+            'address', 
+            'shippingMethod'
+        ])->latest()->paginate(10);
         return new GenericPayload($orders);
     }
 }

@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 */
 Route::middleware('auth:api')->get('/user',\App\Users\Actions\AuthenticatedUserAction::class);
 Route::get('/categories',\App\Categories\Actions\IndexCategoriesAction::class);
+Route::get('payment-methods', App\PaymentMethods\Actions\IndexPaymentMethodsAction::class);
+Route::post('payment-methods', App\PaymentMethods\Actions\StorePaymentMethodAction::class);
 Route::get('/countries', App\Countries\Actions\IndexCountryAction::class);
 Route::get('/products',\App\Products\Actions\IndexProductsAction::class);
 Route::get('/products/{product}',\App\Products\Actions\ShowProductAction::class);

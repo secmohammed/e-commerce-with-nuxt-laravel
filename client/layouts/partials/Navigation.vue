@@ -36,7 +36,7 @@
           Sign in
         </nuxt-link>
         <template v-else>
-            <nuxt-link :to="{ name: 'order' }" class="navbar-item">
+            <nuxt-link :to="{ name: 'orders' }" class="navbar-item">
               Orders
             </nuxt-link>
             <nuxt-link :to="{name : 'cart' }" class="navbar-item">

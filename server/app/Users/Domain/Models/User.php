@@ -4,6 +4,7 @@ namespace App\Users\Domain\Models;
 
 use App\Addresses\Domain\Models\Address;
 use App\Orders\Domain\Models\Order;
+use App\PaymentMethods\Domain\Models\PaymentMethod;
 use App\ProductVariation\Domain\Models\ProductVariation;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'gateway_customer_id'
     ];
 
     /**
@@ -63,5 +64,9 @@ class User extends Authenticatable implements JWTSubject
     public function addresses()
     {
         return $this->hasMany(Address::class);
+    }
+    public function paymentMethods()
+    {
+        return $this->hasMany(PaymentMethod::class);
     }
 }

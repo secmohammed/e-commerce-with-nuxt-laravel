@@ -24,7 +24,7 @@ class EmptyCart
      * @param  OrderCreated  $event
      * @return void
      */
-    public function handle(OrderCreated $event)
+    public function handle()
     {
         $this->cart->empty();
     }
