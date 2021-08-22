@@ -1,6 +1,4 @@
-import {
-  mapGetters
-} from 'vuex';
+import { mapGetters } from 'vuex'
 import Vue from 'vue'
 
 const User = {
@@ -9,7 +7,7 @@ const User = {
       computed: {
         ...mapGetters({
           user: 'auth/user',
-          authenticated: 'auth/authenticated',
+          authenticated: 'auth/authenticated'
         })
       }
     })

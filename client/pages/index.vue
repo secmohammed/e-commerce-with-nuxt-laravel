@@ -1,17 +1,13 @@
 <template>
-    <div class="section">
-        <div class="container is-fluid">
-            <p>Products</p>
-        </div>
+  <div class="section">
+    <div class="container is-fluid">
+      <p>Products</p>
     </div>
+  </div>
 </template>
 
 <script>
-
-export default {
-};
+export default {}
 </script>
 
-<style>
-
-</style>
+<style></style>
